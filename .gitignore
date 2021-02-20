@@ -2,6 +2,7 @@
 
 # production
 # /dist
+/dist
 /docs-dist
 /lib
 
