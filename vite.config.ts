@@ -5,5 +5,6 @@ import md from "./plugins/vite-plugin-md"
 
 // https://vitejs.dev/config/
 export default defineConfig({
+	base: './',
 	plugins: [vue(), vueJsx(), md()],
 });

@@ -1,0 +1,16 @@
+name: gh-pages
+
+on: [pull_request, push]
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@main
+
+      - name: install
+        run: yarn install
+
+      - name: build
+        run: yarn build

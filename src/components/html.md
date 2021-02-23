@@ -1,2 +1,2 @@
-# github-action-branding
+# GitHub Action Branding
 

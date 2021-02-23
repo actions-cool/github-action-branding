@@ -1,26 +1,8 @@
 <template>
   <input id="copy-text" />
   <div class="title">
-    <div v-html="template"></div>
-    <div class="color-list">
-      <div class="color-picker-item random" @click="setColor('')">random</div>
-      <div
-        v-for="(item, key) in presetPalettes"
-        :key="key"
-        class="color-picker-item"
-        :style="
-          'background:' +
-          item.primary +
-          (key === 'yellow' ? ';color: black;' : '')
-        "
-        @click="setColor(item.primary)"
-      >
-        {{ key }}
-      </div>
-      <div class="color-picker-item color-white" @click="setColor('white')">
-        white
-      </div>
-    </div>
+    <p class="project-title">GitHub Action Branding</p>
+    <!-- <div v-html="template"></div> -->
 
     <div class="search">
       <svg
@@ -38,26 +20,56 @@
         <circle cx="11" cy="11" r="8"></circle>
         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
       </svg>
-      <input v-model="searchKey" type="text" placeholder="Search icons" />
+      <input ref="input" v-model="searchKey" type="text" :placeholder="'Search '+ Object.keys(icons).length + ' icons (Press \/  to focus)'" />
     </div>
   </div>
-  <div class="container">
-    <feather-icon
-      v-for="item in filterColorList"
-      :key="item.name"
-      :color="color ? color : getColor()"
-      :icon="item"
-      @success-click="showMessage"
-    ></feather-icon>
+  <div class="content">
+    <div class="container">
+      <feather-icon
+        v-for="item in filterColorList"
+        :key="item.name"
+        :color="color ? color : getColor()"
+        :icon="item"
+        @success-click="showMessage"
+      ></feather-icon>
+    </div>
+    <div class="color-list" :key="date">
+      <div class="color-picker-item random" @click="(e) => setColor(e, '')">
+        random
+      </div>
+      <div
+        v-for="(item, key) in presetPalettes"
+        :key="key"
+        class="color-picker-item"
+        :style="
+          'background:' +
+          item +
+          (key === 'yellow' || key === 'white' ? ';color: black;' : '')
+        "
+        @click="(e) => setColor(e, item)"
+      >
+        {{ key }}
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { defineComponent, computed, ref } from "vue";
+import { defineComponent, computed, ref, onMounted } from "vue";
 import { icons } from "feather-icons";
 import FeatherIcon from "./components/feather-icon";
-import template from "./components/html.md";
-import { presetPalettes } from "@ant-design/colors";
+// import template from "./components/html.md";
+import { getIcon } from "./utils";
+const presetPalettes = {
+  white: "white",
+  yellow: "#ffd33d",
+  blue: "#0366d6",
+  green: "#28a745",
+  orange: "#f66a0a",
+  red: "#d73a49",
+  purple: "#6f42c1",
+  "gray-dark": "#24292e",
+};
 
 export default defineComponent({
   name: "App",
@@ -65,6 +77,8 @@ export default defineComponent({
     FeatherIcon,
   },
   setup() {
+    const input = ref();
+    const date = ref(new Date().getTime());
     const colorList = Object.keys(presetPalettes);
     const searchKey = ref("");
     const color = ref("");
@@ -72,14 +86,30 @@ export default defineComponent({
       return searchKey.value ? filterList(icons, searchKey.value) : icons;
     });
     const { getColor } = randomColor(colorList);
-    const setColor = (val) => {
-      color.value = val;
+    const setColor = (e, val) => {
+      if (!val) {
+        date.value = new Date().getTime();
+        color.value = val;
+        return false
+      }
+      if (color.value === val) {
+        getIcon(e, val, "copied");
+      } else {
+        color.value = val;
+      }
     };
     const showMessage = (name) => {
-      console.log(name)
-    } 
+      console.log(name);
+    };
+    onMounted(() => {
+      document.onkeyup = (e) => {
+        if(e.key === "/") {
+          input.value.focus()
+        }
+      }
+    })
     return {
-      template,
+      // template,
       icons,
       getColor,
       filterColorList,
@@ -88,6 +118,8 @@ export default defineComponent({
       color,
       setColor,
       showMessage,
+      date,
+      input,
     };
   },
 });
@@ -106,7 +138,7 @@ function randomColor(colorList) {
   function getColor() {
     return presetPalettes[
       colorList[Math.floor(Math.random() * colorList.length)]
-    ].primary;
+    ];
   }
   return {
     getColor,
@@ -115,11 +147,12 @@ function randomColor(colorList) {
 </script>
 
 <style>
-body {
-  background: rgb(213, 236, 229);
-}
 .title {
   margin: 10px 20px;
+}
+.project-title {
+  font-size: 30px;
+  font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
 }
 .container {
   display: grid;
@@ -153,21 +186,26 @@ body {
   font-size: 20px;
   margin-left: 10px;
 }
-.color-list {
+.content {
   display: flex;
-  width: 80%;
-  justify-content: space-between;
+}
+.container {
+  width: 100%;
+}
+.color-list {
+  min-width: 150px;
 }
 .color-picker-item {
-  margin: 10px;
+  margin: 20px 0;
   width: 100px;
   text-align: center;
   color: white;
-  padding: 4px 8px;
+  padding: 6px 12px;
   border-radius: 4px;
   cursor: pointer;
   box-shadow: 0px 4px 6px rgb(0 0 0 / 20%);
   transition: all 0.2s;
+  font-size: 18px;
 }
 .color-picker-item:active {
   transform: scale(0.9, 0.9) translateY(2px);
