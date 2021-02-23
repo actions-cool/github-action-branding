@@ -12,5 +12,5 @@ jobs:
       - name: install
         run: yarn install
 
-      - name: build
+      - name: ci
         run: yarn all
