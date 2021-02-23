@@ -1,4 +1,4 @@
-name: gh-pages
+name: CI
 
 on: [pull_request, push]
 
