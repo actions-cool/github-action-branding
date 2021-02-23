@@ -5,8 +5,8 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "format": "prettier --write src/*.* plugins/*.js *.ts",
-    "format-check": "prettier --check src/*.* plugins/*.js *.ts",
+    "format": "prettier --write src/*.* *.ts",
+    "format-check": "prettier --check src/*.* *.ts",
     "all": "yarn run build && yarn run format-check"
   },
   "dependencies": {
