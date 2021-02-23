@@ -58,7 +58,10 @@
           :key="key"
           class="color-picker-item"
           :style="
-            'background:' + item + (key === 'yellow' || key === 'white' ? ';color: black;' : '')
+            (color === presetPalettes[key] ? 'cursor: copy;' : 'cursor: pointer;') +
+            'background:' +
+            item +
+            (key === 'yellow' || key === 'white' ? ';color: black;' : '')
           "
           @click="e => setColor(e, item)"
         >
