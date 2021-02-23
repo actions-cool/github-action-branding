@@ -1,2 +1,0 @@
-# github-action-branding
-
