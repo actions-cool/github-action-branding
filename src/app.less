@@ -82,21 +82,21 @@ body {
   display: grid;
   grid-gap: 20px;
   grid-template-columns: repeat(auto-fill, 100px);
+  width: 100%;
   transition: all 0.5s;
 }
+
 .content {
   display: flex;
 }
-.container {
-  width: 100%;
-}
+
 .color-list {
   position: sticky;
   top: 0px;
-  grid-column: 2;
   width: @color-list-width;
   max-height: 100vh;
 }
+
 .color-picker-item {
   width: 100px;
   margin: 20px 0;
@@ -109,17 +109,23 @@ body {
   cursor: pointer;
   transition: all 0.2s;
 }
+
 .color-picker-item:active {
   transform: scale(0.9, 0.9) translateY(2px);
 }
+
 .random {
   background-image: linear-gradient(to right, @green, @blue, @yellow, @red);
 }
+
 .color-white {
   color: black;
   background: white;
 }
+
 #copy-text {
   position: fixed;
   top: -100px;
 }
+
+@import './mobile.less';

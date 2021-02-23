@@ -1,5 +1,5 @@
 {
-  "name": "action-branding",
+  "name": "github-action-branding",
   "version": "1.0.0",
   "scripts": {
     "dev": "vite",

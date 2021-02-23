@@ -1,0 +1,43 @@
+@media only screen and (max-width: 1200px) {
+  body {
+    padding: 10px 20px;
+  }
+  .header {
+    .title {
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+      text-shadow: @shadow 1px 1px;
+    }
+    span + span {
+      margin-left: 10px;
+    }
+  }
+
+  .body {
+    &-main {
+      width: 100%;
+    }
+    .search input {
+      width: 100%;
+      font-size: 1rem;
+    }
+    .container {
+      grid-gap: 10px;
+      grid-template-columns: repeat(auto-fill, 90px);
+      justify-content: center;
+    }
+    .color-list {
+      top: 60px;
+      width: 50px;
+      margin-top: 60px;
+      margin-left: 8px;
+    }
+    .color-picker-item {
+      width: 40px;
+      padding: 8px 0;
+      &-text {
+        display: none;
+      }
+    }
+  }
+}

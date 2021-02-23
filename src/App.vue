@@ -50,7 +50,9 @@
         </div>
       </div>
       <div class="color-list" :key="date">
-        <div class="color-picker-item random" @click="e => setColor(e, '')">random</div>
+        <div class="color-picker-item random" @click="e => setColor(e, '')">
+          <div class="color-picker-item-text">random</div>
+        </div>
         <div
           v-for="(item, key) in presetPalettes"
           :key="key"
@@ -60,7 +62,7 @@
           "
           @click="e => setColor(e, item)"
         >
-          {{ key }}
+          <div class="color-picker-item-text">{{ key }}</div>
         </div>
       </div>
     </div>

@@ -9,9 +9,9 @@ const getIcon = (e, text, title, fn) => {
   message.setAttribute(
     "style",
     "position:fixed;top:" +
-    (e.y + 20) +
+    (e.y + 26) +
     "px;left:" +
-    (e.x + 20) +
+    (e.x - 36) +
     "px;opacity:0;transition:all 0.3s;background: #eee; color: #000; height:0px;overflow:hidden; padding:4px 12px;border-radius: 2px;"
   );
   document.body.append(message);
