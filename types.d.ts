@@ -1,1 +1,1 @@
-declare module 'feather-icons'
+declare module 'feather-icons';

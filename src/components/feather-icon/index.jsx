@@ -14,7 +14,7 @@ const FeacherIcon = defineComponent({
 					class="icon-detail"
 					style={"background:" + props.color}
 					onClick={(e) =>
-						getIcon(e, props.icon.name, 'copied',  () => {
+						getIcon(e, props.icon.name, 'Copied',  () => {
 							emit("success-click", props.icon.name);
 						})
 					}

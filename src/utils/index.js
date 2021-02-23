@@ -9,10 +9,10 @@ const getIcon = (e, text, title, fn) => {
   message.setAttribute(
     "style",
     "position:fixed;top:" +
-    (e.y + 1) +
+    (e.y + 20) +
     "px;left:" +
-    (e.x + 1) +
-    "px;opacity:0;transition:all .5s;background: white;height:0px;overflow:hidden;padding:4px 12px;border-radius:4px;"
+    (e.x + 20) +
+    "px;opacity:0;transition:all 0.3s;background: #eee; color: #000; height:0px;overflow:hidden; padding:4px 12px;border-radius: 2px;"
   );
   document.body.append(message);
   setTimeout(() => {
@@ -26,7 +26,7 @@ const getIcon = (e, text, title, fn) => {
     }, 500)
     message.style.height = "0px";
     message.style.opacity = '0';
-  }, 1000);
+  }, 1200);
 };
 
 export {

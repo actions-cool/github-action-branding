@@ -1,0 +1,125 @@
+@import './variable.less';
+
+body {
+  margin: 0;
+  padding: 20px 40px;
+  font-family: 'Nunito', 'Arial', 'Microsoft YaHei', '黑体', '宋体', sans-serif;
+  background-color: @bg;
+}
+
+.header {
+  .title {
+    font-weight: bold;
+    font-size: 3rem;
+    letter-spacing: 2px;
+    text-shadow: @shadow 1px 1px, @shadow 2px 2px, @shadow 3px 3px, @shadow 4px 4px;
+
+    &:nth-child(1) {
+      color: @red;
+    }
+    &:nth-child(2) {
+      color: @green;
+    }
+    &:nth-child(3) {
+      color: @yellow;
+    }
+  }
+  span + span {
+    margin-left: 20px;
+  }
+}
+
+.body {
+  display: flex;
+  &-main {
+    width: calc(100% - @color-list-width);
+  }
+  .search {
+    position: sticky;
+    top: 0px;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 12px 0 20px 0;
+    background: linear-gradient(@bg 50%, rgba(246, 248, 250, 0));
+    border-radius: 6px;
+    outline: 0;
+    transition: all 0.3s;
+    appearance: none;
+    &-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+    &-svg {
+      position: absolute;
+      left: 10px;
+      display: flex;
+      align-items: center;
+    }
+    input {
+      width: calc(100% - 80px);
+      height: 1.8rem;
+      padding: 8px 16px 8px 46px;
+      color: inherit;
+      font-size: 1.4rem;
+      font-family: 'Nunito', 'Arial', 'Microsoft YaHei', '黑体', '宋体', sans-serif;
+      line-height: 1.8rem;
+      border: none;
+      border-radius: 6px;
+      outline: none;
+      box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px 0 rgb(0 0 0 / 6%);
+      &:focus {
+        box-shadow: 0 0 0 3px @blue;
+      }
+    }
+  }
+}
+
+.container {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fill, 100px);
+  transition: all 0.5s;
+}
+.content {
+  display: flex;
+}
+.container {
+  width: 100%;
+}
+.color-list {
+  position: sticky;
+  top: 0px;
+  grid-column: 2;
+  width: @color-list-width;
+  max-height: 100vh;
+}
+.color-picker-item {
+  width: 100px;
+  margin: 20px 0;
+  padding: 6px 12px;
+  color: white;
+  font-size: 18px;
+  text-align: center;
+  border-radius: 4px;
+  box-shadow: 0px 4px 6px rgb(0 0 0 / 20%);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.color-picker-item:active {
+  transform: scale(0.9, 0.9) translateY(2px);
+}
+.random {
+  background-image: linear-gradient(to right, @green, @blue, @yellow, @red);
+}
+.color-white {
+  color: black;
+  background: white;
+}
+#copy-text {
+  position: fixed;
+  top: -100px;
+}
