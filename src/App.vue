@@ -1,6 +1,6 @@
 <template>
   <div id="main">
-    <input id="copy-text" />
+    <textarea id="copy-text"></textarea>
     <div class="header">
       <h1>
         <span class="title">GitHub</span>
@@ -67,6 +67,11 @@
         >
           <div class="color-picker-item-text">{{ key }}</div>
         </div>
+        <div class="branding" v-if="color && iconName" @click="getBringding">
+          <p>branding:</p>
+          <p class="s2">icon: '{{ iconName }}'</p>
+          <p class="s2">color: '{{ color }}'</p>
+        </div>
       </div>
     </div>
   </div>
@@ -95,6 +100,7 @@ export default defineComponent({
   },
   setup() {
     const input = ref();
+    const iconName = ref('');
     const date = ref(new Date().getTime());
     const colorList = Object.keys(presetPalettes);
     const searchKey = ref('');
@@ -103,7 +109,7 @@ export default defineComponent({
       return searchKey.value ? filterList(icons, searchKey.value) : icons;
     });
     const { getColor } = randomColor(colorList);
-    const setColor = (e: Event, val: string) => {
+    const setColor = (e: MouseEvent, val: string) => {
       if (!val) {
         date.value = new Date().getTime();
         color.value = val;
@@ -116,7 +122,15 @@ export default defineComponent({
       }
     };
     const showMessage = (name: string) => {
-      console.log(name);
+      iconName.value = name;
+    };
+    const getBringding = (e: MouseEvent) => {
+      const val = `# https://actions-cool.github.io/github-action-branding/
+branding:
+  icon: '${iconName.value}'
+  color: '${color.value}'
+`;
+      getIcon(e, val, 'Copied');
     };
     onMounted(() => {
       document.onkeyup = e => {
@@ -137,6 +151,8 @@ export default defineComponent({
       showMessage,
       date,
       input,
+      iconName,
+      getBringding,
     };
   },
 });

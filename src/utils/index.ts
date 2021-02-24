@@ -1,5 +1,5 @@
 const getIcon = (e: MouseEvent, text: string, title: string, fn?: () => void) => {
-  var el = document.getElementById('copy-text') as HTMLInputElement;
+  var el = document.getElementById('copy-text') as HTMLTextAreaElement;
   el.value = text;
   el.select();
   document.execCommand('copy');
