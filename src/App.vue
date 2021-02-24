@@ -72,12 +72,12 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent, computed, ref, onMounted } from 'vue';
 import { icons } from 'feather-icons';
 import FeatherIcon from './components/feather-icon';
 import { getIcon } from './utils';
-const presetPalettes = {
+const presetPalettes: Record<string, string> = {
   white: 'white',
   yellow: '#ffd33d',
   blue: '#0366d6',
@@ -103,7 +103,7 @@ export default defineComponent({
       return searchKey.value ? filterList(icons, searchKey.value) : icons;
     });
     const { getColor } = randomColor(colorList);
-    const setColor = (e, val) => {
+    const setColor = (e: Event, val: string) => {
       if (!val) {
         date.value = new Date().getTime();
         color.value = val;
@@ -115,7 +115,7 @@ export default defineComponent({
         color.value = val;
       }
     };
-    const showMessage = name => {
+    const showMessage = (name: string) => {
       console.log(name);
     };
     onMounted(() => {
@@ -141,8 +141,8 @@ export default defineComponent({
   },
 });
 
-function filterList(list, searchKey) {
-  const filterTarget = {};
+function filterList(list: Record<string, any>, searchKey: string) {
+  const filterTarget: Record<string, any> = {};
   for (let i in list) {
     if (i.indexOf(searchKey) !== -1) {
       filterTarget[i] = list[i];
@@ -151,7 +151,7 @@ function filterList(list, searchKey) {
   return filterTarget;
 }
 
-function randomColor(colorList) {
+function randomColor(colorList: string[]) {
   function getColor() {
     return presetPalettes[colorList[Math.floor(Math.random() * colorList.length)]];
   }
