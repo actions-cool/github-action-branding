@@ -4,4 +4,4 @@ declare module '*.vue' {
   export default component;
 }
 
-declare module 'feather-icons'
+declare module 'feather-icons';

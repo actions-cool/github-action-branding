@@ -1,4 +1,4 @@
-const getIcon = (e: MouseEvent, text: string, title: string, fn: () => void) => {
+const getIcon = (e: MouseEvent, text: string, title: string, fn?: () => void) => {
   var el = document.getElementById('copy-text') as HTMLInputElement;
   el.value = text;
   el.select();
