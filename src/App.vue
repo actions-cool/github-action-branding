@@ -42,7 +42,7 @@
             <feather-icon
               v-for="item in filterColorList"
               :key="item.name"
-              :color="color.length ? color : getColor()"
+              :color="color.length ? color : item.color"
               :icon="item"
               @success-click="showMessage"
             ></feather-icon>
@@ -67,23 +67,30 @@
         >
           <div class="color-picker-item-text">{{ key }}</div>
         </div>
-        <div class="branding" v-if="brandingColor && iconName" @click="getBringding">
-          <div class="b-title">
-            <i class="b-circle b-red"></i>
-            <i class="b-circle b-yellow"></i>
-            <i class="b-circle b-green"></i>
+        <template v-if="brandingColor && iconName">
+          <div class="branding" @click="getBringding">
+            <div class="b-title">
+              <i class="b-circle b-red"></i>
+              <i class="b-circle b-yellow"></i>
+              <i class="b-circle b-green"></i>
+            </div>
+            <p>branding:</p>
+            <p class="s2">icon: '{{ iconName }}'</p>
+            <p class="s2">color: '{{ brandingColor }}'</p>
           </div>
-          <p>branding:</p>
-          <p class="s2">icon: '{{ iconName }}'</p>
-          <p class="s2">color: '{{ brandingColor }}'</p>
-        </div>
+          <feather-icon
+            class="branding-icon"
+            :color="presetPalettes[brandingColor]"
+            :icon="icons[iconName]"
+          ></feather-icon>
+        </template>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref, onMounted } from 'vue';
+import { defineComponent, watch, ref, onMounted, onBeforeMount } from 'vue';
 import { icons } from 'feather-icons';
 import FeatherIcon from './components/feather-icon';
 import { getIcon } from './utils';
@@ -110,12 +117,19 @@ export default defineComponent({
     const searchKey = ref('');
     const color = ref<Array<string>>([]);
     const brandingColor = ref('');
-    const filterColorList = computed(() => {
-      return searchKey.value ? filterList(icons, searchKey.value) : icons;
-    });
+    const filterColorList = ref(icons);
+    watch(
+      () => searchKey.value,
+      val => {
+        filterColorList.value = filterList(icons, val);
+      },
+    );
     const { getColor } = randomColor(colorList);
     const setColor = (e: MouseEvent, val: string[]) => {
       if (!val.length) {
+        for (let i in icons) {
+          setIconColor(icons[i], getColor());
+        }
         color.value = [];
         brandingColor.value = '';
         return false;
@@ -139,6 +153,11 @@ branding:
 `;
       getIcon(e, val, 'Copied');
     };
+    onBeforeMount(() => {
+      for (let i in icons) {
+        setIconColor(icons[i], getColor());
+      }
+    });
     onMounted(() => {
       document.onkeyup = e => {
         if (e.key === '/') {
@@ -163,6 +182,10 @@ branding:
     };
   },
 });
+
+function setIconColor(icon: Record<string, any>, color: string[]) {
+  return (icon.color = color);
+}
 
 function filterList(list: Record<string, any>, searchKey: string) {
   const filterTarget: Record<string, any> = {};
