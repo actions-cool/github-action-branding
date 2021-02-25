@@ -1,5 +1,5 @@
 import { defineComponent } from "vue";
-import "./index.css";
+import "./index.less";
 import { getIcon } from "../utils";
 const FeacherIcon = defineComponent({
 	props: {
