@@ -74,9 +74,18 @@
               <i class="b-circle b-yellow"></i>
               <i class="b-circle b-green"></i>
             </div>
-            <p>branding:</p>
-            <p class="s2">icon: '{{ iconName }}'</p>
-            <p class="s2">color: '{{ brandingColor }}'</p>
+            <div class="title">
+              branding
+              <div>:</div>
+            </div>
+            <div class="title">
+              icon
+              <div>: '{{ iconName }}'</div>
+            </div>
+            <div class="title">
+              color
+              <div>: '{{ brandingColor }}'</div>
+            </div>
           </div>
           <feather-icon
             class="branding-icon"
