@@ -42,15 +42,15 @@
             <feather-icon
               v-for="item in filterColorList"
               :key="item.name"
-              :color="color ? color : getColor()"
+              :color="color.length ? color : getColor()"
               :icon="item"
               @success-click="showMessage"
             ></feather-icon>
           </div>
         </div>
       </div>
-      <div class="color-list" :key="date">
-        <div class="color-picker-item random" @click="e => setColor(e, '')">
+      <div class="color-list">
+        <div class="color-picker-item random" @click="e => setColor(e, [])">
           <div class="color-picker-item-text">random</div>
         </div>
         <div
@@ -58,19 +58,24 @@
           :key="key"
           class="color-picker-item"
           :style="
-            (color === presetPalettes[key] ? 'cursor: copy;' : 'cursor: pointer;') +
+            (color[1] === presetPalettes[key] ? 'cursor: copy;' : 'cursor: pointer;') +
             'background:' +
             item +
             (key === 'yellow' || key === 'white' ? ';color: black;' : '')
           "
-          @click="e => setColor(e, item)"
+          @click="e => setColor(e, [key, item])"
         >
           <div class="color-picker-item-text">{{ key }}</div>
         </div>
-        <div class="branding" v-if="color && iconName" @click="getBringding">
+        <div class="branding" v-if="brandingColor && iconName" @click="getBringding">
+          <div class="b-title">
+            <i class="b-circle b-red"></i>
+            <i class="b-circle b-yellow"></i>
+            <i class="b-circle b-green"></i>
+          </div>
           <p>branding:</p>
           <p class="s2">icon: '{{ iconName }}'</p>
-          <p class="s2">color: '{{ color }}'</p>
+          <p class="s2">color: '{{ brandingColor }}'</p>
         </div>
       </div>
     </div>
@@ -101,34 +106,36 @@ export default defineComponent({
   setup() {
     const input = ref();
     const iconName = ref('');
-    const date = ref(new Date().getTime());
     const colorList = Object.keys(presetPalettes);
     const searchKey = ref('');
-    const color = ref('');
+    const color = ref<Array<string>>([]);
+    const brandingColor = ref('');
     const filterColorList = computed(() => {
       return searchKey.value ? filterList(icons, searchKey.value) : icons;
     });
     const { getColor } = randomColor(colorList);
-    const setColor = (e: MouseEvent, val: string) => {
-      if (!val) {
-        date.value = new Date().getTime();
-        color.value = val;
+    const setColor = (e: MouseEvent, val: string[]) => {
+      if (!val.length) {
+        color.value = [];
+        brandingColor.value = '';
         return false;
       }
-      if (color.value === val) {
-        getIcon(e, val, 'Copied');
+      if (color.value[1] === val[1]) {
+        getIcon(e, val[0], 'Copied');
       } else {
         color.value = val;
+        brandingColor.value = val[0];
       }
     };
-    const showMessage = (name: string) => {
+    const showMessage = (name: string, colorItem: string[]) => {
       iconName.value = name;
+      brandingColor.value = colorItem[0];
     };
     const getBringding = (e: MouseEvent) => {
       const val = `# https://actions-cool.github.io/github-action-branding/
 branding:
   icon: '${iconName.value}'
-  color: '${color.value}'
+  color: '${color.value[0]}'
 `;
       getIcon(e, val, 'Copied');
     };
@@ -149,10 +156,10 @@ branding:
       color,
       setColor,
       showMessage,
-      date,
       input,
       iconName,
       getBringding,
+      brandingColor,
     };
   },
 });
@@ -169,7 +176,8 @@ function filterList(list: Record<string, any>, searchKey: string) {
 
 function randomColor(colorList: string[]) {
   function getColor() {
-    return presetPalettes[colorList[Math.floor(Math.random() * colorList.length)]];
+    const cRam = colorList[Math.floor(Math.random() * colorList.length)];
+    return [cRam, presetPalettes[cRam]];
   }
   return {
     getColor,

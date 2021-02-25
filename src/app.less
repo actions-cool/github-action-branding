@@ -120,16 +120,37 @@ body {
   padding: 6px 12px;
   color: white;
   font-size: 14px;
-  background-color: rgba(80, 80, 80, 0.5);
-  border: 1px solid rgba(60, 60, 60, 0.2);
+  background-color: rgb(21, 21, 21);
   border-radius: 4px;
-  box-shadow: 0px 4px 6px rgb(0 0 0 / 20%);
+  box-shadow: rgb(0 0 0 / 30%) 0px 10px 10px;
   cursor: copy;
   p {
     margin: 0;
   }
   .s2 {
     text-indent: 10px;
+  }
+  .b {
+    &-title {
+      display: flex;
+      justify-content: space-between;
+      width: 38px;
+      margin: 4px 0;
+    }
+    &-circle {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    &-red {
+      background-color: rgb(255, 95, 86);
+    }
+    &-yellow {
+      background-color: rgb(255, 189, 46);
+    }
+    &-green {
+      background-color: rgb(39, 201, 63);
+    }
   }
 }
 
