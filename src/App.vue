@@ -139,6 +139,7 @@ export default defineComponent({
         for (let i in icons) {
           setIconColor(icons[i], getColor());
         }
+        iconName.value = '';
         color.value = [];
         brandingColor.value = '';
         return false;
