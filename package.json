@@ -7,7 +7,7 @@
     "serve": "vite preview",
     "format": "prettier --write src/*.* *.ts",
     "format-check": "prettier --check src/*.* *.ts",
-    "lint": "eslint src --ext .ts,.less",
+    "lint": "eslint src --ext .ts",
     "lint:style": "stylelint src/style/*.less --syntax less",
     "lint-fix": "yarn lint --fix",
     "lint-fix:style": "yarn lint:style --fix",
