@@ -6,11 +6,11 @@ Quickly preview and select the [branding icon](https://docs.github.com/en/action
 
 - https://actions-cool.github.io/github-action-branding/
 
-![](./1.png)
+![](assets/1.png)
 
 ---
 
-![](./2.png)
+![](assets/2.png)
 
 ## LICENSE
 

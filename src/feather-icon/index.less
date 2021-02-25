@@ -2,11 +2,12 @@
   text-align: center;
   font-size: 14px;
   height: 120px;
+  p {
+    font-size: 16px;
+    margin-block-end: 10px;
+  }
 }
-.icon-item p {
-  font-size: 16px;
-  margin-block-end: 10px;
-}
+
 .icon-detail {
   margin: 0 auto;
   width: 56px;
@@ -18,16 +19,17 @@
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
   cursor: copy;
   transition: .4s;
+  &:active {
+    transform: scale(0.9, 0.9) translateY(2px);
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.8);
+  }
 }
-.icon-detail:active {
-  transform: scale(0.9, 0.9) translateY(2px);
-  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.8);
-}
+
 .branding-icon {
   margin-top: 30px;
   cursor: default;
   pointer-events: none;
-}
-.branding-icon .icon-detail {
-  transform: scale(1.2);
+  .icon-detail {
+    transform: scale(1.2);
+  }
 }

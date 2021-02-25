@@ -101,7 +101,7 @@
 <script lang="ts">
 import { defineComponent, watch, ref, onMounted, onBeforeMount } from 'vue';
 import { icons } from 'feather-icons';
-import FeatherIcon from './components/feather-icon';
+import FeatherIcon from './feather-icon';
 import { getIcon } from './utils';
 const presetPalettes: Record<string, string> = {
   white: 'white',
