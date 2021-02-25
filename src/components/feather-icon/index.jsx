@@ -4,7 +4,7 @@ import { getIcon } from "./../../utils";
 const FeacherIcon = defineComponent({
 	props: {
 		icon: Object,
-		color: String,
+		color: [Array, String],
 	},
 	emits: ["success-click"],
 	setup(props, { emit }) {
@@ -12,10 +12,10 @@ const FeacherIcon = defineComponent({
 			<div class="icon-item">
 				<div
 					class="icon-detail"
-					style={"background:" + props.color}
+					style={"background:" + (props.color instanceof Array ? props.color[1] : props.color)}
 					onClick={(e) =>
 						getIcon(e, props.icon.name, 'Copied',  () => {
-							emit("success-click", props.icon.name);
+							emit("success-click", props.icon.name,  props.color);
 						})
 					}
 					title={"Click copy " + props.icon.name}
@@ -23,7 +23,7 @@ const FeacherIcon = defineComponent({
 					<svg
 						{...props.icon.attrs}
 						color={
-							props.color === "#ffd33d" || props.color === "white"
+							props.color.includes("#ffd33d") || props.color.includes("white")
 								? "black"
 								: "white"
 						}

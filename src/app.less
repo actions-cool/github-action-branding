@@ -60,7 +60,7 @@ body {
       align-items: center;
     }
     input {
-      width: calc(100% - 80px);
+      width: calc(100% - 100px);
       height: 1.8rem;
       padding: 8px 16px 8px 46px;
       color: inherit;
@@ -99,10 +99,10 @@ body {
 
 .color-picker-item {
   width: 100px;
-  margin: 20px 0;
-  padding: 6px 12px;
+  margin: 20px auto;
   color: white;
   font-size: 18px;
+  line-height: 36px;
   text-align: center;
   border-radius: 4px;
   box-shadow: 0px 4px 6px rgb(0 0 0 / 20%);
@@ -115,21 +115,45 @@ body {
 }
 
 .branding {
-  width: 150px;
-  margin: 20px 0;
-  padding: 6px 12px;
-  color: white;
-  font-size: 14px;
-  background-color: rgba(80, 80, 80, 0.5);
-  border: 1px solid rgba(60, 60, 60, 0.2);
+  width: 200px;
+  padding: 6px 16px;
+  font-size: 16px;
+  background-color: rgb(253, 246, 227);
   border-radius: 4px;
-  box-shadow: 0px 4px 6px rgb(0 0 0 / 20%);
+  box-shadow: rgb(0 0 0 / 30%) 0px 10px 10px;
   cursor: copy;
-  p {
-    margin: 0;
+  .title {
+    color: #d33682;
+    div {
+      display: inline;
+      color: #859900;
+    }
+    &:nth-child(3),
+    &:nth-child(4) {
+      margin-left: 16px;
+    }
   }
-  .s2 {
-    text-indent: 10px;
+  .b {
+    &-title {
+      display: flex;
+      justify-content: space-between;
+      width: 38px;
+      margin: 4px 0;
+    }
+    &-circle {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    &-red {
+      background-color: rgb(255, 95, 86);
+    }
+    &-yellow {
+      background-color: rgb(255, 189, 46);
+    }
+    &-green {
+      background-color: rgb(39, 201, 63);
+    }
   }
 }
 
