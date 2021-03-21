@@ -159,8 +159,8 @@ export default defineComponent({
       const val = `# https://actions-cool.github.io/github-action-branding/
 branding:
   icon: '${iconName.value}'
-  color: '${brandingColor.value}'
-`;
+  color: '${brandingColor.value}'`;
+
       getIcon(e, val, 'Copied');
     };
     onBeforeMount(() => {
