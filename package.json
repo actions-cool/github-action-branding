@@ -23,7 +23,7 @@
     "@umijs/fabric": "^2.5.6",
     "@vitejs/plugin-vue": "^1.1.4",
     "@vue/compiler-sfc": "^3.0.5",
-    "@vuedx/typecheck": "^0.6.0",
+    "@vuedx/typecheck": "^0.7.2",
     "@vuedx/typescript-plugin-vue": "^0.6.0",
     "eslint": "^7.20.0",
     "less": "^4.1.1",
