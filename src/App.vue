@@ -102,7 +102,7 @@
 import { defineComponent, watch, ref, onMounted, onBeforeMount } from 'vue';
 import { icons } from 'feather-icons';
 import FeatherIcon from './feather-icon';
-import { getIcon } from './utils';
+import { getIcon, filterIcons } from './utils';
 const presetPalettes: Record<string, string> = {
   white: 'white',
   yellow: '#ffd33d',
@@ -126,7 +126,7 @@ export default defineComponent({
     const searchKey = ref('');
     const color = ref<Array<string>>([]);
     const brandingColor = ref('');
-    const filterColorList = ref(icons);
+    const filterColorList = ref(filterIcons(icons));
     watch(
       () => searchKey.value,
       val => {

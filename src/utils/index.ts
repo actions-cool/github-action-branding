@@ -29,4 +29,46 @@ const getIcon = (e: MouseEvent, text: string, title: string, fn?: () => void) =>
   }, 1200);
 };
 
-export { getIcon };
+const filterIconList = [
+  'chrome',
+  'codepen',
+  'codesandbox',
+  'coffee',
+  'columns',
+  'divide-circle',
+  'divide-square',
+  'divide',
+  'dribbble',
+  'figma',
+  'framer',
+  'frown',
+  'github',
+  'gitlab',
+  'hexagon',
+  'instagram',
+  'key',
+  'linkedin',
+  'meh',
+  'mouse-pointer',
+  'pen-tool',
+  'slack',
+  'smile',
+  'table',
+  'tool',
+  'trello',
+  'twitch',
+  'twitter',
+  'x-octagon',
+  'youtube',
+];
+
+const filterIcons = (icons: Record<string, any>) => {
+  for (const icon in icons) {
+    if (filterIconList.includes(icon)) {
+      delete icons[icon];
+    }
+  }
+  return icons;
+};
+
+export { getIcon, filterIcons };
